@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/wallpaper">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Battery and Network Strength Icons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/_5sdp"
+            android:background="#20000000"
+            android:gravity="center">
+
+            <TextClock
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:format12Hour="hh:mm a" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:id="@+id/networkIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_wifi_high" />
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="0dp"/>
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_battery_100" />
+
+<!--            <iam.thevoid.batteryview.BatteryView-->
+<!--                android:id="@+id/battery_view"-->
+<!--                android:layout_width="24dp"-->
+<!--                android:layout_height="20dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                app:bv_borderColor="@android:color/white"-->
+<!--                app:bv_infillColor="@android:color/white"-->
+<!--                app:bv_percent="50"/>-->
+
+        </LinearLayout>
+
+        <!-- Time Display -->
+        <TextClock
+            android:id="@+id/timeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="48sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:format12Hour="hh:mm"
+            android:format24Hour="HH:mm:ss" />
+
+        <!-- Date Display -->
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2022-06-15 周三"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="8dp"
+            android:gravity="center" />
+
+        <!-- Temperature Display -->
+        <TextView
+            android:id="@+id/temperatureTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="24~28°C"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="8dp"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#20000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menu"
+            android:background="@android:color/transparent"
+            android:textStyle="bold"/>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Setting"
+            android:background="@android:color/transparent"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
