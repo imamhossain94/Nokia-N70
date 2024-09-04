@@ -53,6 +53,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation("com.intuit.sdp:sdp-android:1.1.1")
+    implementation("com.intuit.sdp:ssp-android:1.1.1")
     implementation("io.github.iamthevoid.batteryview:batteryview:0.6.1")
 
 }
