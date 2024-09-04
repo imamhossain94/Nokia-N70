@@ -8,11 +8,12 @@ fun View.applyScaleOnTouch() {
     setOnTouchListener { v, motionEvent ->
         when (motionEvent.action) {
             MotionEvent.ACTION_DOWN -> {
-                v.animate().scaleX(0.95f).scaleY(0.95f).setDuration(100).start()
+                v.animate().scaleX(0.95f).scaleY(0.95f).setDuration(50).start()
                 true
             }
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                v.animate().scaleX(1.0f).scaleY(1.0f).setDuration(100).start()
+                v.context.vibrate()
+                v.animate().scaleX(1.0f).scaleY(1.0f).setDuration(50).start()
                 v.performClick()
                 true
             }
@@ -21,9 +22,8 @@ fun View.applyScaleOnTouch() {
     }
 }
 
-
 enum class NavAction {
-    LEFT, RIGHT, TOP, BOTTOM, NONE
+    LEFT, RIGHT, TOP, BOTTOM, HOME
 }
 
 fun View.applyScaleOnTouch(nav: (Set<NavAction>) -> Unit) {
@@ -42,7 +42,7 @@ fun View.applyScaleOnTouch(nav: (Set<NavAction>) -> Unit) {
                 if (touchY < viewHeight * 0.25) actions.add(NavAction.TOP)
                 if (touchY > viewHeight * 0.75) actions.add(NavAction.BOTTOM)
 
-                if (actions.isEmpty()) actions.add(NavAction.NONE)
+                if (actions.isEmpty()) actions.add(NavAction.HOME)
 
                 nav.invoke(actions)
 
@@ -51,11 +51,12 @@ fun View.applyScaleOnTouch(nav: (Set<NavAction>) -> Unit) {
                 v.pivotX = viewWidth / 2f
                 v.pivotY = viewHeight / 2f
 
-                v.animate().scaleX(0.95f).scaleY(0.95f).setDuration(100).start()
+                v.animate().scaleX(0.95f).scaleY(0.95f).setDuration(50).start()
                 true
             }
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                v.animate().scaleX(1.0f).scaleY(1.0f).setDuration(100).start()
+                v.context.vibrate()
+                v.animate().scaleX(1.0f).scaleY(1.0f).setDuration(50).start()
                 v.performClick()
                 true
             }
