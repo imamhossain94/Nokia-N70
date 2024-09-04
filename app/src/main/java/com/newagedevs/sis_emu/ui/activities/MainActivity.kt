@@ -1,18 +1,23 @@
-package com.newagedevs.sis_emu
+package com.newagedevs.sis_emu.ui.activities
 
 import android.os.Bundle
-import android.view.MotionEvent
-import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.newagedevs.sis_emu.R
 import com.newagedevs.sis_emu.extensions.NavAction
 import com.newagedevs.sis_emu.extensions.applyScaleOnTouch
+import com.newagedevs.sis_emu.ui.viewmodel.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    private val viewModel: MainViewModel by viewModels()
 
     private lateinit var btnOption: ImageView
     private lateinit var btnCall: ImageView
@@ -47,35 +52,38 @@ class MainActivity : AppCompatActivity() {
 
 
         btnOption.setOnClickListener {
-            Toast.makeText(this, "Option", Toast.LENGTH_SHORT).show()
+            viewModel.setToast("Option")
         }
 
         btnCall.setOnClickListener {
-            Toast.makeText(this, "Call", Toast.LENGTH_SHORT).show()
+            viewModel.setToast("Call")
         }
 
         btnCancel.setOnClickListener {
-            Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show()
+            viewModel.setToast("Cancel")
         }
 
         btnExit.setOnClickListener {
-            Toast.makeText(this, "Exit", Toast.LENGTH_SHORT).show()
+            viewModel.setToast("Exit")
         }
 
 
         btnNavigation.applyScaleOnTouch { actions ->
-            Toast.makeText(this, actions.toString(), Toast.LENGTH_SHORT).show()
+            viewModel.setToast(actions.toString())
+            if (NavAction.HOME in actions) {
+
+            }
             if (NavAction.LEFT in actions) {
 
             }
             if (NavAction.RIGHT in actions) {
-                // Handle right side touch
+
             }
             if (NavAction.TOP in actions) {
-                // Handle top side touch
+
             }
             if (NavAction.BOTTOM in actions) {
-                // Handle bottom side touch
+
             }
         }
 
