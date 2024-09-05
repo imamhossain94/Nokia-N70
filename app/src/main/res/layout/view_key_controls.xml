@@ -3,9 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/_35sdp"
-    android:layout_marginEnd="@dimen/_35sdp"
-    android:layout_marginBottom="@dimen/_25sdp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -19,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:layout_marginVertical="@dimen/_5sdp">
+            android:layout_marginVertical="@dimen/_6sdp">
 
             <ImageView
                 android:id="@+id/btn_option"
@@ -61,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:layout_marginVertical="@dimen/_5sdp">
+            android:layout_marginVertical="@dimen/_6sdp">
 
             <ImageView
                 android:id="@+id/btn_cancel"

@@ -3,94 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingVertical="36dp"
     android:background="@drawable/wallpaper">
 
-
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#20000000"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingHorizontal="@dimen/_15sdp"
-        android:paddingVertical="@dimen/_5sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextClock
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:format12Hour="hh:mm a"
-            android:gravity="center"
-            android:textColor="#FFFFFF"
-            android:textSize="@dimen/_18ssp" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:id="@+id/networkIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_wifi_high" />
-
-        <Space
-            android:layout_width="10dp"
-            android:layout_height="0dp" />
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_battery_100" />
-
-        <!--            <iam.thevoid.batteryview.BatteryView-->
-        <!--                android:id="@+id/battery_view"-->
-        <!--                android:layout_width="24dp"-->
-        <!--                android:layout_height="20dp"-->
-        <!--                android:layout_gravity="center"-->
-        <!--                app:bv_borderColor="@android:color/white"-->
-        <!--                app:bv_infillColor="@android:color/white"-->
-        <!--                app:bv_percent="50"/>-->
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-
+        app:layout_constraintTop_toTopOf="parent">
 
         <!-- Time Display -->
         <TextClock
-            android:id="@+id/timeTextView"
+            android:id="@+id/timeTextClock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:format12Hour="hh:mm"
-            android:format24Hour="HH:mm:ss"
+            android:format24Hour="HH:mm"
             android:gravity="center"
             android:textColor="#FFFFFF"
-            android:textSize="@dimen/_48sdp" />
+            android:textSize="@dimen/_36sdp" />
 
         <!-- Date Display -->
-        <TextView
-            android:id="@+id/dateTextView"
+        <TextClock
+            android:id="@+id/dateTextClock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="2022-06-15 周三"
+            android:format24Hour="EEE, MMM d 周三"
+            android:format12Hour="EEE, MMM d 周三"
             android:textColor="#FFFFFF"
-            android:textSize="@dimen/_20ssp" />
+            android:textSize="@dimen/_18ssp" />
 
         <!-- Temperature Display -->
         <TextView
@@ -100,7 +47,7 @@
             android:gravity="center"
             android:text="24~28°C"
             android:textColor="#FFFFFF"
-            android:textSize="@dimen/_20ssp" />
+            android:textSize="@dimen/_18ssp" />
 
     </LinearLayout>
 
@@ -111,43 +58,9 @@
         android:background="@android:color/transparent"
         android:textColor="@color/white"
         android:textSize="@dimen/_18ssp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#20000000"
-        android:orientation="horizontal"
-        android:paddingHorizontal="@dimen/_15sdp"
-        android:paddingVertical="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:text="Menu"
-            android:textSize="@dimen/_18ssp"
-            android:textColor="@color/white"/>
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:text="Setting"
-            android:textSize="@dimen/_18ssp"
-            android:textColor="@color/white"/>
-    </LinearLayout>
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -56,7 +56,6 @@ dependencies {
 
     implementation("com.intuit.sdp:sdp-android:1.1.1")
     implementation("com.intuit.ssp:ssp-android:1.1.1")
-    implementation("io.github.iamthevoid.batteryview:batteryview:0.6.1")
 
     // Hilt
     implementation("com.google.dagger:hilt-android:2.48")

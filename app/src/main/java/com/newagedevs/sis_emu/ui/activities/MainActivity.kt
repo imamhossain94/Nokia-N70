@@ -1,17 +1,20 @@
 package com.newagedevs.sis_emu.ui.activities
 
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.newagedevs.sis_emu.R
-import com.newagedevs.sis_emu.extensions.NavAction
-import com.newagedevs.sis_emu.extensions.applyScaleOnTouch
 import com.newagedevs.sis_emu.ui.viewmodel.MainViewModel
+import com.newagedevs.sis_emu.ui.views.DisplayView
+import com.newagedevs.sis_emu.ui.views.KeyCommandListener
+import com.newagedevs.sis_emu.ui.views.KeyCommands
+import com.newagedevs.sis_emu.ui.views.KeyControlsView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,13 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels()
 
-    private lateinit var btnOption: ImageView
-    private lateinit var btnCall: ImageView
-    private lateinit var btnCancel: ImageView
-    private lateinit var btnExit: ImageView
-
-    private lateinit var btnNavigation: ImageView
-
+    private lateinit var displayView: DisplayView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,58 +34,38 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-
-        btnOption = this.findViewById(R.id.btn_option)
-        btnCall = this.findViewById(R.id.btn_call)
-        btnCancel = this.findViewById(R.id.btn_cancel)
-        btnExit = this.findViewById(R.id.btn_exit)
-
-        btnNavigation = this.findViewById(R.id.btn_navigation)
-
-        btnOption.applyScaleOnTouch()
-        btnCall.applyScaleOnTouch()
-        btnCancel.applyScaleOnTouch()
-        btnExit.applyScaleOnTouch()
+        displayView = this.findViewById(R.id.display_view)
 
 
-        btnOption.setOnClickListener {
-            viewModel.setToast("Option")
-        }
+        val keyControlView = this.findViewById<KeyControlsView>(R.id.key_control_view)
+        keyControlView.keyCommandListener = object : KeyCommandListener {
+            override fun onKeyCommand(command: KeyCommands) {
+//                viewModel.setToast(command.toString())
 
-        btnCall.setOnClickListener {
-            viewModel.setToast("Call")
-        }
-
-        btnCancel.setOnClickListener {
-            viewModel.setToast("Cancel")
-        }
-
-        btnExit.setOnClickListener {
-            viewModel.setToast("Exit")
-        }
+                displayView.showToast(command.toString())
 
 
-        btnNavigation.applyScaleOnTouch { actions ->
-            viewModel.setToast(actions.toString())
-            if (NavAction.HOME in actions) {
-
-            }
-            if (NavAction.LEFT in actions) {
-
-            }
-            if (NavAction.RIGHT in actions) {
-
-            }
-            if (NavAction.TOP in actions) {
-
-            }
-            if (NavAction.BOTTOM in actions) {
-
+                when (command) {
+                    KeyCommands.OPTION, KeyCommands.MENU -> {
+                        displayView.hideStatusBar()
+                        displayView.hideNavigationBar()
+                        displayView.navigateTo(R.id.nav_menu)
+                    }
+                    KeyCommands.CALL -> { }
+                    KeyCommands.CANCEL, KeyCommands.EXIT -> { displayView.navigateUp() }
+                    KeyCommands.HOME -> {
+                        displayView.showStatusBar()
+                        displayView.showNavigationBar()
+                    }
+                    else ->  { }
+                }
             }
         }
 
     }
 
-
+    override fun onSupportNavigateUp(): Boolean {
+        return displayView.navigateUp() || super.onSupportNavigateUp()
+    }
 
 }
