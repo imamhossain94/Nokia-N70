@@ -12,7 +12,7 @@
     <ImageView
         android:id="@+id/n70"
         android:layout_width="@dimen/_275sdp"
-        android:layout_height="@dimen/_560sdp"
+        android:layout_height="@dimen/_570sdp"
         android:layout_margin="@dimen/_5sdp"
         android:layout_gravity="center"
         android:contentDescription="@string/todo"

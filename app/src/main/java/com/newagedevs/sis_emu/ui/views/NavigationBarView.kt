@@ -52,22 +52,26 @@ class NavigationBarView @JvmOverloads constructor(
     }
 
     fun show() {
-        visibility = View.VISIBLE
-        val animation = TranslateAnimation(0f, 0f, +height.toFloat(), 0f).apply {
-            duration = 100
-            fillAfter = true
+        if(visibility != View.VISIBLE) {
+            visibility = View.VISIBLE
+            val animation = TranslateAnimation(0f, 0f, +height.toFloat(), 0f).apply {
+                duration = 100
+                fillAfter = true
+            }
+            startAnimation(animation)
         }
-        startAnimation(animation)
     }
 
 
     fun hide() {
-        val animation = TranslateAnimation(0f, 0f, 0f, height.toFloat()).apply {
-            duration = 100
-            fillAfter = true
+        if(visibility != View.GONE) {
+            val animation = TranslateAnimation(0f, 0f, 0f, height.toFloat()).apply {
+                duration = 100
+                fillAfter = true
+            }
+            startAnimation(animation)
+            visibility = View.GONE
         }
-        startAnimation(animation)
-        visibility = View.GONE
     }
 
 }

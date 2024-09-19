@@ -27,24 +27,24 @@
 
     <ImageView
         android:id="@+id/wifi_view"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="@dimen/_14ssp"
+        android:layout_height="@dimen/_14ssp"
         android:layout_marginHorizontal="@dimen/_3sdp"
         android:contentDescription="@string/todo"
         android:src="@drawable/ic_wifi_3" />
 
     <ImageView
         android:id="@+id/signal_view"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="@dimen/_14ssp"
+        android:layout_height="@dimen/_14ssp"
         android:layout_marginHorizontal="@dimen/_3sdp"
         android:contentDescription="@string/todo"
         android:src="@drawable/ic_cellular_signal_3" />
 
     <ImageView
         android:id="@+id/battery_view"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="@dimen/_14ssp"
+        android:layout_height="@dimen/_14ssp"
         android:layout_marginHorizontal="@dimen/_3sdp"
         android:contentDescription="@string/todo"
         android:src="@drawable/ic_battery_75" />

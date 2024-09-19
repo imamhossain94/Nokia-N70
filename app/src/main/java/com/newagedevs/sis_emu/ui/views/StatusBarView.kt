@@ -9,6 +9,8 @@ import android.net.wifi.WifiInfo
 import android.net.wifi.WifiManager
 import android.os.BatteryManager
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.telephony.PhoneStateListener
 import android.telephony.SignalStrength
 import android.telephony.TelephonyCallback
@@ -26,6 +28,8 @@ import com.newagedevs.sis_emu.R
 class StatusBarView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
+
+    private val mainHandler = Handler(Looper.getMainLooper())
 
     private val clockView: TextClock
     private val wifiView: ImageView
@@ -133,55 +137,67 @@ class StatusBarView @JvmOverloads constructor(
     }
 
     fun updateWifiStatus(level: Int) {
-        val wifiDrawableId = when (level) {
-            0 -> R.drawable.ic_wifi_0
-            1 -> R.drawable.ic_wifi_1
-            2 -> R.drawable.ic_wifi_2
-            3 -> R.drawable.ic_wifi_3
-            else -> R.drawable.ic_wifi_4
+        mainHandler.post {
+            wifiView.visibility = if(level == 0) View.INVISIBLE else View.VISIBLE
+            val wifiDrawableId = when (level) {
+                0 -> R.drawable.ic_wifi_0
+                1 -> R.drawable.ic_wifi_1
+                2 -> R.drawable.ic_wifi_2
+                3 -> R.drawable.ic_wifi_3
+                else -> R.drawable.ic_wifi_4
+            }
+            wifiView.setImageDrawable(ContextCompat.getDrawable(context, wifiDrawableId))
         }
-        wifiView.setImageDrawable(ContextCompat.getDrawable(context, wifiDrawableId))
     }
 
     fun updateSignalStatus(level: Int) {
-        val signalDrawableId = when (level) {
-            0 -> R.drawable.ic_cellular_signal_0
-            1 -> R.drawable.ic_cellular_signal_1
-            2 -> R.drawable.ic_cellular_signal_2
-            3 -> R.drawable.ic_cellular_signal_3
-            else -> R.drawable.ic_cellular_signal_4
+        mainHandler.post {
+            val signalDrawableId = when (level) {
+                0 -> R.drawable.ic_cellular_signal_0
+                1 -> R.drawable.ic_cellular_signal_1
+                2 -> R.drawable.ic_cellular_signal_2
+                3 -> R.drawable.ic_cellular_signal_3
+                else -> R.drawable.ic_cellular_signal_4
+            }
+            signalView.setImageDrawable(ContextCompat.getDrawable(context, signalDrawableId))
         }
-        signalView.setImageDrawable(ContextCompat.getDrawable(context, signalDrawableId))
     }
 
     fun updateBatteryStatus(level: Int) {
-        val batteryDrawableId = when (level) {
-            in 0..10 -> R.drawable.ic_battery_0
-            in 11..25 -> R.drawable.ic_battery_25
-            in 26..50 -> R.drawable.ic_battery_50
-            in 51..75 -> R.drawable.ic_battery_75
-            else -> R.drawable.ic_battery_100
+        mainHandler.post {
+            val batteryDrawableId = when (level) {
+                in 0..10 -> R.drawable.ic_battery_0
+                in 11..25 -> R.drawable.ic_battery_25
+                in 26..50 -> R.drawable.ic_battery_50
+                in 51..75 -> R.drawable.ic_battery_75
+                else -> R.drawable.ic_battery_100
+            }
+            batteryView.setImageDrawable(ContextCompat.getDrawable(context, batteryDrawableId))
         }
-        batteryView.setImageDrawable(ContextCompat.getDrawable(context, batteryDrawableId))
     }
 
     fun show() {
-        visibility = View.VISIBLE
-        val animation = TranslateAnimation(0f, 0f, -height.toFloat(), 0f).apply {
-            duration = 100
-            fillAfter = true
+        if(visibility != View.VISIBLE) {
+            visibility = View.VISIBLE
+            val animation = TranslateAnimation(0f, 0f, -height.toFloat(), 0f).apply {
+                duration = 100
+                fillAfter = true
+            }
+            startAnimation(animation)
         }
-        startAnimation(animation)
     }
 
 
     fun hide() {
-        val animation = TranslateAnimation(0f, 0f, 0f, -height.toFloat()).apply {
-            duration = 100
-            fillAfter = true
+        if(visibility != View.GONE) {
+            val animation = TranslateAnimation(0f, 0f, 0f, -height.toFloat()).apply {
+                duration = 100
+                fillAfter = true
+            }
+            startAnimation(animation)
+            visibility = View.GONE
         }
-        startAnimation(animation)
-        visibility = View.GONE
+
     }
 
     private fun getCurrentWifiLevel(): Int {

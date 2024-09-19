@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import com.newagedevs.sis_emu.R
 
@@ -73,12 +74,20 @@ class DisplayView @JvmOverloads constructor(
         toastTextView.visibility = View.GONE
     }
 
-    fun navigateTo(destinationId: Int, args: Bundle? = null) {
-        navController.navigate(destinationId, args)
+    fun currentDestinationId(): Int {
+        return navController.currentDestination?.id ?: 0
     }
 
-    fun navigateUp(): Boolean {
-       return navController.navigateUp()
+    fun navigateTo(destinationId: Int, args: Bundle? = null) {
+        if(currentDestinationId() != destinationId) navController.navigate(destinationId, args)
+    }
+
+    fun navigateUp(clearStack:Boolean = false): Boolean {
+        return if(clearStack){
+            navController.popBackStack(navController.graph.startDestinationId, false)
+        } else {
+            navController.navigateUp()
+        }
     }
 
 

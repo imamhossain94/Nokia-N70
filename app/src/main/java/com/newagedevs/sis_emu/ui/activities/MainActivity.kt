@@ -40,20 +40,25 @@ class MainActivity : AppCompatActivity() {
         val keyControlView = this.findViewById<KeyControlsView>(R.id.key_control_view)
         keyControlView.keyCommandListener = object : KeyCommandListener {
             override fun onKeyCommand(command: KeyCommands) {
-//                viewModel.setToast(command.toString())
-
                 displayView.showToast(command.toString())
 
 
                 when (command) {
-                    KeyCommands.OPTION, KeyCommands.MENU -> {
+                    KeyCommands.OPTION, KeyCommands.MENU, KeyCommands.HOME -> {
                         displayView.hideStatusBar()
                         displayView.hideNavigationBar()
                         displayView.navigateTo(R.id.nav_menu)
                     }
                     KeyCommands.CALL -> { }
-                    KeyCommands.CANCEL, KeyCommands.EXIT -> { displayView.navigateUp() }
-                    KeyCommands.HOME -> {
+                    KeyCommands.CANCEL-> {
+                        displayView.navigateUp()
+                        if(displayView.currentDestinationId() == R.id.nav_home) {
+                            displayView.showStatusBar()
+                            displayView.showNavigationBar()
+                        }
+                    }
+                    KeyCommands.EXIT -> {
+                        displayView.navigateUp(true)
                         displayView.showStatusBar()
                         displayView.showNavigationBar()
                     }
